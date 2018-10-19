@@ -18,14 +18,15 @@
 
     <h1>Wacky Widgets</h1>
 
-    <table class="pure-table">
+    {% if widget_list|length == 0 %}
+    <h3>No Widgets Exist</h3>
+    {% else %}
+    <table class="pure-table pure-table-striped">
         <thead>
-            {% if widget_list|length == 0 %}
-            <h3>No Widgets Exist</h3>
-            {% else %}
             <tr>
                 <th>Description</th>
                 <th>Quantity</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -33,16 +34,17 @@
         <tr>
             <td>{{widget.description}}</td>
             <td>{{widget.quantity}}</td>
+            <td><a>X</a></td>
         </tr>
         {% endfor %}
-        {% endif %}
-
     </table>
+    {% endif %}
+
 
 
     <hr>
     <h4>Add Widget</h4>
-    <form action="{% url 'add_data' %}" method="POST" class="pure-button">
+    <form action="{% url 'add_data' %}" method="POST" class="pure-">
         {% csrf_token %}
         <table>
             {{ form.as_p }}
